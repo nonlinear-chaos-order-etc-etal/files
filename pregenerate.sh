@@ -11,7 +11,12 @@ for d in $(find ./releases -type d); do
   done
 done
 
+for f in $(ls); do
+  echo " - [$f]($f)" >> index.md 
+  markdown index.md > index.html
+done
+
 mv index.html index2.html
-markdown README.md > index.html
+pandoc README.md -o index.html
 cat index2.html >> index.html
 rm index2.html
