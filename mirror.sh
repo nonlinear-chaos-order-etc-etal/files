@@ -8,7 +8,7 @@ SCHEME='https://'
 SITE='files.i2p-projekt.de/'
 
 #DIR=releases
-RELEASELISTING=$(lynx -listonly -nonumbers -dump $SCHEME$SITE$DIR/ | sed "s|$SCHEME$SITE$||g")
+RELEASELISTING=$(lynx -listonly -nonumbers -dump "$SCHEME$SITE$DIR/" | sed "s|$SCHEME$SITE$||g")
 
 for f in $RELEASELISTING; do
   echo $SCHEME$SITE$f
