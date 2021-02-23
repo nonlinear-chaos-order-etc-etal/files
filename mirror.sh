@@ -12,7 +12,7 @@ RELEASELISTING=$(lynx -listonly -nonumbers -dump "$SCHEME$SITE$DIR/" | sed "s|$S
 
 for f in $RELEASELISTING; do
   echo $SCHEME$SITE$f
-  wget -r -np -c $SCHEME$SITE$f
+  wget -r -np -c $SCHEME$SITE$f 2> /dev/null
   mkdir -p $f/
   rm $f/*/ -rfv
   cp -rv $SITE$f/* $f/
