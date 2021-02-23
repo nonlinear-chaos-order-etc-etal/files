@@ -7,7 +7,7 @@ for d in $(find ./releases -type d); do
   rm $d/index.md $d/index.html $d/README.md -fv
   for f in $(ls $d); do
     echo " - [$f]($f)" >> $d/README.md 
-    markdown $d/README.md > $d/index.html
+    pandoc $d/README.md -o $d/index.html
   done
 done
 
