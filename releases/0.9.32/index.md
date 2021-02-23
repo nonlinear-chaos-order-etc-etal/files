@@ -1,0 +1,8 @@
+[i2pinstall_0.9.32.jar](i2pinstall_0.9.32.jar)
+[i2pinstall_0.9.32.jar.sig](i2pinstall_0.9.32.jar.sig)
+[i2pinstall_0.9.32_windows.exe](i2pinstall_0.9.32_windows.exe)
+[i2pinstall_0.9.32_windows.exe.sig](i2pinstall_0.9.32_windows.exe.sig)
+[i2psource_0.9.32.tar.bz2](i2psource_0.9.32.tar.bz2)
+[i2psource_0.9.32.tar.bz2.sig](i2psource_0.9.32.tar.bz2.sig)
+[i2pupdate_0.9.32.zip](i2pupdate_0.9.32.zip)
+[i2pupdate_0.9.32.zip.sig](i2pupdate_0.9.32.zip.sig)
