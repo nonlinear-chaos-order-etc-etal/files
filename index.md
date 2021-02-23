@@ -1,5 +1,6 @@
  - [download.i2p2.de](download.i2p2.de)
  - [eephttpd.png](eephttpd.png)
+ - [files.i2p-projekt.de](files.i2p-projekt.de)
  - [index.html](index.html)
  - [LICENSE](LICENSE)
  - [mirror.sh](mirror.sh)
