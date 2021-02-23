@@ -11,5 +11,6 @@ for d in $(find ./releases -type d); do
   done
 done
 
+mv index.html index2.html
 markdown README.md > index.html
-cat index.html >> index.html
+cat index2.html >> index.html
