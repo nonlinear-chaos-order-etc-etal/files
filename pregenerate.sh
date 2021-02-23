@@ -14,3 +14,4 @@ done
 mv index.html index2.html
 markdown README.md > index.html
 cat index2.html >> index.html
+rm index2.html
