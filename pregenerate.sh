@@ -8,6 +8,11 @@ for d in $(find ./releases -type d); do
   for f in $(ls $d); do
     echo " - [$f]($f)" >> $d/README.md 
     pandoc $d/README.md -o $d/index.html
+    if [ -f $d/shasums.txt ]; then
+      echo '<pre><code>' >> $d/index.html
+      cat $d/shasums.txt >> $d/index.html
+      echo '</code></pre>' >> $d/index.html
+    fi
   done
   rm $d/README.md
 done
