@@ -9,6 +9,7 @@ for d in $(find ./releases -type d); do
     echo " - [$f]($f)" >> $d/README.md 
     pandoc $d/README.md -o $d/index.html
   done
+  rm $d/README.md
 done
 
 rm index.md
