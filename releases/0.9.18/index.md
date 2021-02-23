@@ -1,8 +1,0 @@
-[i2pinstall_0.9.18.jar](i2pinstall_0.9.18.jar)
-[i2pinstall_0.9.18.jar.sig](i2pinstall_0.9.18.jar.sig)
-[i2pinstall_0.9.18_windows.exe](i2pinstall_0.9.18_windows.exe)
-[i2pinstall_0.9.18_windows.exe.sig](i2pinstall_0.9.18_windows.exe.sig)
-[i2psource_0.9.18.tar.bz2](i2psource_0.9.18.tar.bz2)
-[i2psource_0.9.18.tar.bz2.sig](i2psource_0.9.18.tar.bz2.sig)
-[i2pupdate_0.9.18.zip](i2pupdate_0.9.18.zip)
-[i2pupdate_0.9.18.zip.sig](i2pupdate_0.9.18.zip.sig)
