@@ -11,6 +11,7 @@ for d in $(find ./releases -type d); do
   done
 done
 
+rm index.md
 for f in $(ls); do
   echo " - [$f]($f)" >> index.md 
   markdown index.md > index.html
