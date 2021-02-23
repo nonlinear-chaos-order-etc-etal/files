@@ -16,7 +16,7 @@ for f in $RELEASELISTING; do
   wget -r -np -c $SCHEME$SITE$f
   mkdir -p $f/
   cp -rv $SITE$f/* $f/
-  rm $f/*/ -rfv
+  rm $f/*/ $f/*.html -rfv
   git add $f*
   git commit -am "$f"
   git push
