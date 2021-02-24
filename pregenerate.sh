@@ -24,7 +24,7 @@ for f in $(ls); do
     break
   fi
   if [ -d $f ]; then
-    g=$f/
+    g="$f/index.html"
     f=$g
   fi
   echo " - [$f]($f)" >> index.md 
