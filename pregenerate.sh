@@ -19,6 +19,9 @@ done
 
 rm index.md
 for f in $(ls); do
+  if [ $f = "download.i2p2.de" ]; then
+    break
+  fi
   echo " - [$f]($f)" >> index.md 
   markdown index.md > index.html
 done
