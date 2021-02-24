@@ -6,6 +6,13 @@ for d in $(find ./releases -type d); do
   fi
   rm $d/index.md $d/index.html $d/README.md -fv
   for f in $(ls $d); do
+    echo $d/$f  
+    if [ -d $d/$f ]; then
+      echo "IS A DIR"
+      g="$f/index.html"
+      f=$g
+    fi
+  
     echo " - [$f]($f)" >> $d/README.md 
     pandoc $d/README.md -o $d/index.html
     if [ -f $d/shasums.txt ]; then
@@ -23,7 +30,9 @@ for f in $(ls); do
   if [ $f = "download.i2p2.de" ]; then
     break
   fi
+  echo $f
   if [ -d $f ]; then
+    echo "IS A DIR"
     g="$f/index.html"
     f=$g
   fi
