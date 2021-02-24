@@ -25,7 +25,7 @@ for d in $(find ./releases -type d); do
   rm $d/README.md
 done
 
-rm -f index.md
+rm -f index.md index.html index2.html
 for f in $(ls); do
   if [ $f = "download.i2p2.de" ]; then
     break
