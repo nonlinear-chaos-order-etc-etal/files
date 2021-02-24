@@ -56,6 +56,75 @@
 <span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a></span>
 <span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a><span class="fu">rm</span> index.md</span>
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a><span class="kw">for</span> <span class="ex">f</span> in <span class="va">$(</span><span class="fu">ls</span><span class="va">)</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>  <span class="kw">if</span><span class="bu"> [</span> <span class="va">$f</span> <span class="ot">=</span> <span class="st">&quot;download.i2p2.de&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>    <span class="bu">break</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a>  <span class="kw">fi</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true"></a>  <span class="bu">echo</span> <span class="st">&quot; - [</span><span class="va">$f</span><span class="st">](</span><span class="va">$f</span><span class="st">)&quot;</span> <span class="op">&gt;&gt;</span> index.md </span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true"></a>  <span class="ex">markdown</span> index.md <span class="op">&gt;</span> index.html</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true"></a><span class="kw">done</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true"></a><span class="fu">mv</span> index.html index2.html</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true"></a><span class="ex">pandoc</span> README.md -o index.html</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true"></a><span class="fu">cat</span> index2.html <span class="op">&gt;&gt;</span> index.html</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true"></a><span class="fu">rm</span> index2.html</span></code></pre></div>
+<h1 id="git-clone-i2p-release-mirror">git clone i2p-release-mirror</h1>
+<p>This repository holds a complete copy of all the I2P Desktop releases from <code>0.9.10</code> to <code>0.9.49</code>, making it possible to set up a complete mirror of the I2P releases by cloning it into the document root of a web server.</p>
+<p>For example, In the case an I2P user install, it allows you to automatically mirror the whole I2P release repository inside I2P with a single command:</p>
+<p><code>git clone https://github.com/eyedeekay/files $HOME/.i2p/eepsite/docroot/files</code></p>
+<p>Or, for a Debian-style operating system with a package install:</p>
+<p><code>sudo -u i2psvc git clone https://github.com/eyedeekay/files  /var/lib/i2p/i2p-config/eepsite/docroot/files</code></p>
+<p>It can also be cloned and mirrored automatically with eephttpd, using the terminal:</p>
+<p><code>eephttpd -b https://github.com/eyedeekay/files</code></p>
+<p>or the GUI:</p>
+<figure>
+<img src="eephttpd.png" alt="" /><figcaption>eephttpd</figcaption>
+</figure>
+<p>Adapt these examples to the web server of your choice to instantly mirror all the I2P software.</p>
+<p>#scripts</p>
+<p>You can also use the scripts to generate a mirror of I2P releases without cloning the repository from github.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#! /usr/bin/env sh</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="va">SCHEME=</span><span class="st">&#39;https://&#39;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co">#SITE=&#39;download.i2p2.de/&#39;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="va">SITE=</span><span class="st">&#39;files.i2p-projekt.de/&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="va">DIR=</span>releases</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="va">RELEASELISTING=$(</span><span class="fu">lynx</span> -listonly -nonumbers -dump <span class="va">$SCHEME$SITE$DIR</span>/ <span class="kw">|</span> <span class="fu">sed</span> <span class="st">&quot;s|</span><span class="va">$SCHEME$SITE</span><span class="st">$||g&quot;</span><span class="va">)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="kw">for</span> <span class="ex">f</span> in <span class="va">$RELEASELISTING</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>  <span class="fu">wget</span> -r -np -c <span class="va">$SCHEME$SITE$f</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>  <span class="fu">mkdir</span> -p <span class="va">$f</span>/</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a>  <span class="fu">rm</span> <span class="va">$f</span>/*/ -rf</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a>  <span class="fu">cp</span> -rv <span class="va">$SITE$f</span>/* <span class="va">$f</span>/</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a>  <span class="fu">git</span> add <span class="va">$f</span>*</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a>  <span class="fu">git</span> commit -am <span class="st">&quot;</span><span class="va">$f</span><span class="st">&quot;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a>  <span class="fu">git</span> push</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="kw">done</span></span></code></pre></div>
+<p>If the server you are using doesn’t have open directory listings enabled, you can also use the scripts to pre-generate listings for your visitors to navigate with.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="co">#! /usr/bin/env sh</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a><span class="kw">for</span> <span class="ex">d</span> in <span class="va">$(</span><span class="fu">find</span> ./releases -type d<span class="va">)</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="kw">if</span><span class="bu"> [</span> <span class="va">$d</span> <span class="ot">=</span> <span class="st">&quot;download.i2p2.de&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a>    <span class="bu">break</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a>  <span class="kw">fi</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  <span class="fu">rm</span> <span class="va">$d</span>/index.md <span class="va">$d</span>/index.html <span class="va">$d</span>/README.md -fv</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  <span class="kw">for</span> <span class="ex">f</span> in <span class="va">$(</span><span class="fu">ls</span> <span class="va">$d)</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a>    <span class="bu">echo</span> <span class="st">&quot; - [</span><span class="va">$f</span><span class="st">](</span><span class="va">$f</span><span class="st">)&quot;</span> <span class="op">&gt;&gt;</span> <span class="va">$d</span>/README.md </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>    <span class="ex">pandoc</span> <span class="va">$d</span>/README.md -o <span class="va">$d</span>/index.html</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true"></a>    <span class="kw">if</span><span class="bu"> [</span> <span class="ot">-f</span> <span class="va">$d</span>/shasums.txt<span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true"></a>      <span class="bu">echo</span> <span class="st">&#39;&lt;pre&gt;&lt;code&gt;&#39;</span> <span class="op">&gt;&gt;</span> <span class="va">$d</span>/index.html</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true"></a>      <span class="fu">cat</span> <span class="va">$d</span>/shasums.txt <span class="op">&gt;&gt;</span> <span class="va">$d</span>/index.html</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true"></a>      <span class="bu">echo</span> <span class="st">&#39;&lt;/code&gt;&lt;/pre&gt;&#39;</span> <span class="op">&gt;&gt;</span> <span class="va">$d</span>/index.html</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true"></a>    <span class="kw">fi</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true"></a>  <span class="kw">done</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true"></a>  <span class="fu">rm</span> <span class="va">$d</span>/README.md</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true"></a><span class="kw">done</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true"></a><span class="fu">rm</span> index.md</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true"></a><span class="kw">for</span> <span class="ex">f</span> in <span class="va">$(</span><span class="fu">ls</span><span class="va">)</span><span class="kw">;</span> <span class="kw">do</span></span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true"></a>  <span class="bu">echo</span> <span class="st">&quot; - [</span><span class="va">$f</span><span class="st">](</span><span class="va">$f</span><span class="st">)&quot;</span> <span class="op">&gt;&gt;</span> index.md </span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true"></a>  <span class="ex">markdown</span> index.md <span class="op">&gt;</span> index.html</span>
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true"></a><span class="kw">done</span></span>

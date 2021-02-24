@@ -22,6 +22,10 @@ for f in $(ls); do
   if [ $f = "download.i2p2.de" ]; then
     break
   fi
+  if [ -d $f ]; then
+    g=$f/
+    f=$g
+  fi
   echo " - [$f]($f)" >> index.md 
   markdown index.md > index.html
 done
