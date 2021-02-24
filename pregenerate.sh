@@ -14,6 +14,7 @@ for d in $(find ./releases -type d); do
       echo '</code></pre>' >> $d/index.html
     fi
   done
+  git add $d/index.html
   rm $d/README.md
 done
 
